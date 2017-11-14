@@ -1,14 +1,19 @@
 #include <stdio.h>
-#include <stdio>
 #include <iostream>
 using namespace std;
 
 // Quiz CCC
 
+// estrutura simples que representa cada casa de um tabuleiro
+struct casa {
+	int ehBuraco;
+	int foiPisado; // se o usu�rio j� caiu nessa casa
+};
+
 // Tamanho do tabuleiro
 int tamanho = 5;
 // Tabuleiro
-int quizccc[5][5];
+struct casa quizccc[tamanho][tamanho];
 
 // Quantidade de buracos
 int buracos;
@@ -32,15 +37,10 @@ void textoInicial();
 void textoFinal();
 // Exibe os temas que o jogador pode escolher
 void exibirTemas();
-void preencherTabuleiro();
-// Imprime o tabuleiro que exibe apenas as casas que ele já percorreu
-void imprimirTabuleiro(int tabuleiro[5][5]);
-
-// estrutura simples que representa cada casa de um tabuleiro
-struct casa {
-	int ehBuraco;
-	int foiPisado; // se o usu�rio j� caiu nessa casa
-}
+// cria o tabuleiro colocando as casas e setando quais serão buracos
+void criarTabuleiro();
+// Imprime o tabuleiro que exibe apenas as casas que ele j� percorreu
+void imprimirTabuleiro();
 
 //Define posicao dos buracos no tabuleiro
 void posicaoBuracos();
@@ -63,11 +63,24 @@ void qtdBuracos(){
 void posicaoBuracos(){
   i = rand() % 5 + 1;
   j = rand() % 5 + 1;
-  if (quizccc[i][j] != 1){
-      quizccc[i][j] = 1;
+  if (quizccc[i][j].ehBuraco != 1){
+      quizccc[i][j].ehBuraco = 1;
   }else{
     posicaoBuracos();
   }
+}
+
+void criarTabuleiro() {
+	for(int i = 0; i < tamanho; i++) {
+		for(int j = 0; j < tamanho; j++) {
+			quizccc[i][j].ehBuraco = 0;
+			quizccc[i][j].foiPisado = 0;
+		}
+	}
+
+	for(int k = 0; k < buracos; k++) {
+		posicaoBuracos();
+	}
 }
 
 int main () {
@@ -136,4 +149,3 @@ void imprimirTabuleiro(int tabuleiro[5][5]){
         puts("---------------------");
     }
 }
-
