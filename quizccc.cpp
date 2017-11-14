@@ -25,6 +25,12 @@ void exibirTemas();
 // Imprime o tabuleiro que exibe apenas as casas que ele j� percorreu
 void imprimirTabuleiro();
 
+//Define posicao dos buracos no tabuleiro
+void posicaoBuracos();
+
+//Define quantidade de buracos conforme o nível de jogo
+void qtdBuracos();
+
 void qtdBuracos(){
   if (nivel == 1){
     buracos = 8;
