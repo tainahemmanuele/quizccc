@@ -20,6 +20,9 @@ int i;
 
 //Coluna do tabuleiro
 int j;
+
+//Quantidade de vidas que o jogador possui . No inicio do jogo, ele comeca com 3
+int vidas = 3;
 // M�todos
 
 // Boas vindas do jogo
