@@ -1,4 +1,6 @@
 #include <stdio>
+#include <iostream>
+using namespace std;
 
 // Quiz CCC
 
@@ -7,7 +9,12 @@ int tamanho = 5;
 // Tabuleiro
 int quizccc[tamanho][tamanho];
 
-// Métodos
+// Quantidade de buracos
+int buracos;
+
+// Nivel do jogo
+int nivel;
+// Mï¿½todos
 
 // Boas vindas do jogo
 void textoInicial();
@@ -15,8 +22,30 @@ void textoInicial();
 void textoFinal();
 // Exibe os temas que o jogador pode escolher
 void exibirTemas();
-// Imprime o tabuleiro que exibe apenas as casas que ele já percorreu
+// Imprime o tabuleiro que exibe apenas as casas que ele jï¿½ percorreu
 void imprimirTabuleiro();
+
+void qtdBuracos(){
+  if (nivel == 1){
+    buracos = 8;
+  }
+  if (nivel == 2){
+    buracos = 10;
+  }
+  if (nivel == 3){
+    buracos = 12;
+  }
+}
+
+void posicaoBuracos(){
+  i = rand() % 5 + 1;
+  j = rand() % 5 + 1;
+  if (quizccc[i][j] != true){
+      quizccc[i][j] = true
+  }else{
+    posicaoBuracos();
+  }
+}
 
 int main () {
     return 0;
