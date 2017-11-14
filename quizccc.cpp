@@ -14,6 +14,12 @@ int buracos;
 
 // Nivel do jogo
 int nivel;
+
+//Linha do tabuleiro
+int i;
+
+//Coluna do tabuleiro
+int j;
 // M�todos
 
 // Boas vindas do jogo
@@ -46,8 +52,8 @@ void qtdBuracos(){
 void posicaoBuracos(){
   i = rand() % 5 + 1;
   j = rand() % 5 + 1;
-  if (quizccc[i][j] != true){
-      quizccc[i][j] = true
+  if (quizccc[i][j] != 1){
+      quizccc[i][j] = 1;
   }else{
     posicaoBuracos();
   }
