@@ -34,6 +34,12 @@ void exibirTemas();
 // Imprime o tabuleiro que exibe apenas as casas que ele j� percorreu
 void imprimirTabuleiro();
 
+// estrutura simples que representa cada casa de um tabuleiro
+struct casa {
+	int ehBuraco;
+	int foiPisado; // se o usu�rio j� caiu nessa casa
+}
+
 //Define posicao dos buracos no tabuleiro
 void posicaoBuracos();
 
