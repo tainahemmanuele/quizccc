@@ -14,6 +14,15 @@ int buracos;
 
 // Nivel do jogo
 int nivel;
+
+//Linha do tabuleiro
+int i;
+
+//Coluna do tabuleiro
+int j;
+
+//Quantidade de vidas que o jogador possui . No inicio do jogo, ele comeca com 3
+int vidas = 3;
 // M�todos
 
 // Boas vindas do jogo
@@ -31,6 +40,12 @@ struct casa {
 	int foiPisado; // se o usu�rio j� caiu nessa casa
 }
 
+//Define posicao dos buracos no tabuleiro
+void posicaoBuracos();
+
+//Define quantidade de buracos conforme o nível de jogo
+void qtdBuracos();
+
 void qtdBuracos(){
   if (nivel == 1){
     buracos = 8;
@@ -46,8 +61,8 @@ void qtdBuracos(){
 void posicaoBuracos(){
   i = rand() % 5 + 1;
   j = rand() % 5 + 1;
-  if (quizccc[i][j] != true){
-      quizccc[i][j] = true
+  if (quizccc[i][j] != 1){
+      quizccc[i][j] = 1;
   }else{
     posicaoBuracos();
   }
