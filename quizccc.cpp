@@ -37,6 +37,16 @@ void qtdBuracos(){
   }
 }
 
+void posicaoBuracos(){
+  i = rand() % 5 + 1;
+  j = rand() % 5 + 1;
+  if (quizccc[i][j] != true){
+      quizccc[i][j] = true
+  }else{
+    posicaoBuracos();
+  }
+}
+
 int main () {
     return 0;
 }
