@@ -13,7 +13,7 @@ struct casa {
 // Tamanho do tabuleiro
 int tamanho = 5;
 // Tabuleiro
-struct casa quizccc[tamanho][tamanho];
+struct casa quizccc[5][5];
 
 // Quantidade de buracos
 int buracos;
@@ -40,13 +40,16 @@ void exibirTemas();
 // cria o tabuleiro colocando as casas e setando quais serão buracos
 void criarTabuleiro();
 // Imprime o tabuleiro que exibe apenas as casas que ele j� percorreu
-void imprimirTabuleiro();
+void imprimirTabuleiro(struct casa tabuleiro[5][5]);
 
 //Define posicao dos buracos no tabuleiro
 void posicaoBuracos();
 
 //Define quantidade de buracos conforme o nível de jogo
 void qtdBuracos();
+
+// Inicializa o tabuleiro
+void preencherTabuleiro();
 
 void qtdBuracos(){
   if (nivel == 1){
@@ -85,7 +88,7 @@ void criarTabuleiro() {
 
 int main () {
     textoInicial();
-    preencherTabuleiro();
+    criarTabuleiro();
     imprimirTabuleiro(quizccc);
     textoFinal();
     return 0;
@@ -114,16 +117,8 @@ void textoFinal(){
     puts("------------------------------------------------------------------------------");
 }
 
-void preencherTabuleiro(){
-    for(int j = 0; j < tamanho; j ++){
-         for(int k = 0; k < tamanho; k ++){
-            quizccc[j][k] = 1;
-         }
-    }
-}
-
 //Imprime o tabuleiro do jogo no seu estado atual
-void imprimirTabuleiro(int tabuleiro[5][5]){
+void imprimirTabuleiro(struct casa tabuleiro[5][5]){
     printf("\n");
     printf("                              ");
     puts("---------------------");
@@ -133,15 +128,15 @@ void imprimirTabuleiro(int tabuleiro[5][5]){
         printf("|");
         for(int y = 0; y < tamanho; y++){
             // se o valor é -1, significa que ele ja passou por essa posicao
-            if(tabuleiro[x][y] == -1){
+            if(tabuleiro[x][y].foiPisado == 0){
                 printf(" x |");
             }
             // se o valor é 0, essa casa eh um buraco
-            else if(tabuleiro[x][y] == 0){
+            else if(tabuleiro[x][y].ehBuraco == 1 && tabuleiro[x][y].foiPisado == 1){
                 printf(" * |");
             }
             // espaco em branco
-            else if(tabuleiro[x][y] == 1){
+            else {
                 printf("   |");
             }
         }
@@ -149,3 +144,4 @@ void imprimirTabuleiro(int tabuleiro[5][5]){
         puts("---------------------");
     }
 }
+
