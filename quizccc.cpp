@@ -13,7 +13,7 @@ struct casa {
 // Tamanho do tabuleiro
 int tamanho = 5;
 // Tabuleiro
-struct casa quizccc[tamanho][tamanho];
+#define struct casa quizccc[tamanho][tamanho];
 
 // Quantidade de buracos
 int buracos;
@@ -41,12 +41,12 @@ void exibirTemas();
 void criarTabuleiro();
 // Imprime o tabuleiro que exibe apenas as casas que ele j� percorreu
 void imprimirTabuleiro();
-
 //Define posicao dos buracos no tabuleiro
 void posicaoBuracos();
-
 //Define quantidade de buracos conforme o nível de jogo
 void qtdBuracos();
+// Função que coloca os buracos conforme o nível de jogador
+void colocaBuracos();
 
 void qtdBuracos(){
   if (nivel == 1){
@@ -58,6 +58,12 @@ void qtdBuracos(){
   if (nivel == 3){
     buracos = 12;
   }
+}
+
+void colocaBuracos(){
+	for (int i = 0; i < buracos; i++) {
+		posicaoBuracos();
+	}
 }
 
 void posicaoBuracos(){
@@ -85,7 +91,9 @@ void criarTabuleiro() {
 
 int main () {
     textoInicial();
+		qtdBuracos();
     preencherTabuleiro();
+		colocaBuracos();
     imprimirTabuleiro(quizccc);
     textoFinal();
     return 0;
