@@ -162,7 +162,7 @@ void preenchePerguntasNivelUm() {
 	perguntas[7].resposta = 3;
 
 	perguntas[8].texto = "Quanto pesa um Urso Malaio?";
-	perguntas[8].alternativas = "1. 15 a 25 Kg \n2. 25 a 45 Kg \n 3.65 a 95 Kg \n4. 95 a 105 Kg";
+	perguntas[8].alternativas = "1. 15 a 25 Kg \n2. 25 a 45 Kg \n3.65 a 95 Kg \n4. 95 a 105 Kg";
 	perguntas[8].resposta = 2;
 
 	perguntas[9].texto = "Qual o animal terrestre eh mais barulhento?";
@@ -557,18 +557,18 @@ void textoInicial() {
 
 void textoObjetivo(){
 
-	puts("---------------------------  OBJETIVO DO JOGO -------------------------------");
-	puts("O jogador tem como objetivo chegar ao outro lado do tabuleiro com maior pontuacao possivel.");
+	puts("----------------------------  OBJETIVO DO JOGO -------------------------------");
+	puts(">> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior \npontuacao possivel.");
 	puts(">> O jogador deve indicar o numero correspondente ao tema de interesse.");
-	puts(">> Em seguida, ele deve iformar o numero correspondente a dificuldade do jogo, \nclassificada em: Facil, Medio e Dificil.");
+	puts(">> Em seguida, ele deve informar o numero correspondente a dificuldade do jogo, \nclassificada em: Facil, Medio e Dificil.");
 	puts(">> Apos selecionado o tema e o nivel, o jogo eh iniciado e o jogador escolhe \na posicao que deseja avancar no tabuleiro");
-	puts(">> A rodada|jogo acaba quando o jogador 'cair' em um buraco  ou quando a \nquantidade de vidas estiver zerada.");
-	puts(">> O jogador vence quando chegar a ultima celular posicionada no canto inferior a direita do tabuleiro.");
-	puts(">> Ao final da rodada, ganhado ou nao, o jogador serao informado que a mesma \nacabou e a sua pontuacao sera exibida.");
+	puts(">> A rodada|jogo acaba quando o jogador 'cair' em um buraco ou quando a \nquantidade de vidas estiver zerada.");
+	puts(">> O jogador vence quando chegar a ultima celula posicionada no canto inferior \na direita do tabuleiro.");
+	puts(">> Ao final da rodada, ganhando ou nao, o jogador sera informado que a mesma \nacabou e a sua pontuacao sera exibida.");
 	puts("------------------------------------------------------------------------------");
 	puts("-----------------------  SIGINIFICADO DOS SIMBOLOS  --------------------------");
-	puts(">> @ - ignifica  a posicao atual do jogador no tabuleiro.");
-	puts(">> X - Significa que a celular ja foi visitada pelo jogador.");
+	puts(">> @ - Representa a posicao atual do jogador no tabuleiro.");
+	puts(">> X - Significa que a celula ja foi visitada pelo jogador.");
 }
 
 void textoFinal(){
