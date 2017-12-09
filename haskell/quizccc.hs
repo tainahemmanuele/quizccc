@@ -1,13 +1,14 @@
 qtdBuracos :: Int -> Int
 qtdBuracos x |x==1 = 8
-     |x==2 = 10
+     |x == 2 = 10
      |x == 3 = 12
 
 incrementaScore :: Int -> Int -> Int
 incrementaScore x  y| x == 1 = y+50
      | x == 2 = y + 100
      | x == 3 = y + 150
-     
+
+
 main = do
     textoInicial
     textoObjetivo
