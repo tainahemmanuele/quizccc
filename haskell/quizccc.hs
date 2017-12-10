@@ -1,3 +1,14 @@
+qtdBuracos :: Int -> Int
+qtdBuracos x |x==1 = 8
+     |x == 2 = 10
+     |x == 3 = 12
+
+incrementaScore :: Int -> Int -> Int
+incrementaScore x  y| x == 1 = y+50
+     | x == 2 = y + 100
+     | x == 3 = y + 150
+
+
 main = do
     textoInicial
     textoObjetivo
@@ -14,7 +25,7 @@ textoInicial = do
     putStrLn "  #########   #######   #### ##########       #######    #######    #######   "
     putStrLn "         ##                                                                   "
     putStrLn "------------------------------------------------------------------------------"
-    
+
 textoObjetivo = do
     putStrLn "----------------------------  OBJETIVO DO JOGO -------------------------------"
     putStrLn ">> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior \npontuacao possivel."
@@ -28,7 +39,7 @@ textoObjetivo = do
     putStrLn "-----------------------  SIGINIFICADO DOS SIMBOLOS  --------------------------"
     putStrLn ">> @ - Representa a posicao atual do jogador no tabuleiro."
     putStrLn ">> X - Significa que a celula ja foi visitada pelo jogador."
-    
+
 textoFinal = do
     putStrLn "------------------------------------------------------------------------------"
     putStrLn "PRODUZIDO POR:"
