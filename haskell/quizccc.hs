@@ -20,8 +20,8 @@ incrementaScore x  y| x == 1 = y+50
      | x == 2 = y + 100
      | x == 3 = y + 150
 
-incrementaLife :: Int -> Int
-incrementaLife x | x == 0 = -1
+decrementaLife :: Int -> Int
+decrementaLife x | x == 0 = -1
      |otherwise x = x -1
      
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
