@@ -2,7 +2,7 @@ import Textos
 
 
 -- Definindo tipos
-type Posicao = (Int, Int)
+--type Posicao = (Int, Int)
 --type Pergunta = (String, String, Int)
 --type Celula = (Int, Pergunta)
 
@@ -34,6 +34,9 @@ data Celula = Celula { value :: Int,
     pergunta :: Pergunta
 }
 
+data Posicao  = Posicao { posX :: Int,
+    posY:: Int
+}
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
 showMenu = do
