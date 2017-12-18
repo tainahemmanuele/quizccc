@@ -1,9 +1,10 @@
 import Textos
 
+
 -- Definindo tipos
 type Posicao = (Int, Int)
-type Pergunta = (String, String, Int)
-type Celula = (Int, Pergunta)
+--type Pergunta = (String, String, Int)
+--type Celula = (Int, Pergunta)
 
 main = do
     Textos.textoInicial
@@ -23,6 +24,15 @@ incrementaScore x  y| x == 1 = y+50
 decrementaLife :: Int -> Int
 decrementaLife x | x == 0 = -1
      |otherwise  = x -1
+
+data Pergunta = Pergunta { texto :: String,
+     alternativas :: String,
+     resposta :: Int
+}
+
+data Celula = Celula { value :: Int,
+    pergunta :: Pergunta
+}
 
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
