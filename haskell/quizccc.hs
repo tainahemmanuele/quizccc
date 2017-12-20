@@ -1,14 +1,19 @@
 import Textos
+import Data.Array
+
 
 -- Definindo tipos
-type Posicao = (Int, Int)
-type Pergunta = (String, String, Int)
-type Celula = (Int, Pergunta)
+--type Posicao = (Int, Int)
+--type Pergunta = (String, String, Int)
+--type Celula = (Int, Pergunta)
+
+type Tabuleiro = Array Posicao Celula
 
 main = do
     Textos.textoInicial
     Textos.textoObjetivo
     Textos.textoFinal
+
 
 qtdBuracos :: Int -> Int
 qtdBuracos x |x==1 = 8
@@ -24,9 +29,31 @@ decrementaLife :: Int -> Int
 decrementaLife x | x == 0 = -1
      |otherwise  = x -1
 
+--Falta terminar a funcao
+verificaSeEhPossivelCaminhar :: Posicao -> Bool
+verificaSeEhPossivelCaminhar pos |(posX pos < 0 ||  posX pos> 4) || (posY pos< 0 || posY pos> 4) = False
+     --tabuleiro[pos.posX][pos.posY].value == -1 = False
+     |otherwise = True
+
+
+data Pergunta = Pergunta { texto :: String,
+     alternativas :: String,
+     resposta :: Int
+}
+
+data Celula = Celula { value :: Int,
+    pergunta :: Pergunta
+}
+
+data Posicao  = Posicao { posX :: Int,
+    posY:: Int
+}
+
+
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
 showMenu = do
+	--let tabuleiro = array ((1,1)(5,5)) 
     putStrLn "\n"
     putStrLn "Indique o numero correspondente ao tema que voce deseja jogar:"
     putStrLn "\n"
