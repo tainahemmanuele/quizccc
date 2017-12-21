@@ -1,6 +1,6 @@
 import Textos
 import Data.Array
-
+import Data.Matrix
 
 -- Definindo tipos
 --type Posicao = (Int, Int)
@@ -13,6 +13,7 @@ main = do
     Textos.textoInicial
     Textos.textoObjetivo
     Textos.textoFinal
+    print (criarMatriz 4 4)
 
 
 qtdBuracos :: Int -> Int
@@ -28,6 +29,10 @@ incrementaScore x  y| x == 1 = y+50
 decrementaLife :: Int -> Int
 decrementaLife x | x == 0 = -1
      |otherwise  = x -1
+     
+criarMatriz :: Int -> Int -> Matrix Integer
+criarMatriz x y = zero x y
+
 
 --Falta terminar a funcao
 verificaSeEhPossivelCaminhar :: Posicao -> Bool
