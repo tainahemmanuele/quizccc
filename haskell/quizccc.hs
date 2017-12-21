@@ -57,8 +57,8 @@ exibirPergunta i  nivel score vida lista = do
         putStrLn "Parabens!"
      else do
         let vidaAtual = decrementaLife vida
-        putStrLn "Voce errou! A resposta correta eh a alternativa:"
-        putStrLn "Quantidade de vidas: "  
+        putStrLn  ("Voce errou! A resposta correta eh a alternativa:" ++(alternativas (lista!!i)))
+        putStrLn ("Quantidade de vidas: " ++show(vidaAtual))
 
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
