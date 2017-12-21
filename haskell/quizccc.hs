@@ -1,6 +1,7 @@
-import Textos
 import Data.Array
 import Data.Matrix
+import Textos
+import System.Random
 
 -- Definindo tipos
 --type Posicao = (Int, Int)
@@ -14,7 +15,6 @@ main = do
     Textos.textoObjetivo
     Textos.textoFinal
     print (criarMatriz 4 4)
-
 
 qtdBuracos :: Int -> Int
 qtdBuracos x |x==1 = 8
@@ -30,9 +30,16 @@ decrementaLife :: Int -> Int
 decrementaLife x | x == 0 = -1
      |otherwise  = x -1
      
-criarMatriz :: Int -> Int -> Matrix Integer
+criarMatriz :: Int -> Int -> Matrix Int
 criarMatriz x y = zero x y
 
+tabuleiro = [
+    [0, 0, 1, 0, 0],
+    [0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0],
+    [1, 0, 1, 0, 0],
+]
 
 --Falta terminar a funcao
 verificaSeEhPossivelCaminhar :: Posicao -> Bool
@@ -58,7 +65,7 @@ data Posicao  = Posicao { posX :: Int,
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
 showMenu = do
-	--let tabuleiro = array ((1,1)(5,5)) 
+    --let tabuleiro = array ((1,1)(5,5)) 
     putStrLn "\n"
     putStrLn "Indique o numero correspondente ao tema que voce deseja jogar:"
     putStrLn "\n"
