@@ -47,17 +47,17 @@ verificaSeEhPossivelCaminhar pos |(posX pos < 0 ||  posX pos> 4) || (posY pos< 0
      --tabuleiro[pos.posX][pos.posY].value == -1 = False
      |otherwise = True
 
-exibirPergunta :: Int -> Int -> Int -> Int-> [Pergunta] -> IO()
+exibirPergunta :: Int -> Int -> Int -> Int-> Array Int Pergunta -> IO()
 exibirPergunta i  nivel score vida lista = do
-     putStrLn  (texto (lista!!i))
-     putStrLn  (alternativas (lista!!i))
+     putStrLn  (texto (lista!i))
+     putStrLn  (alternativas (lista!i))
      escolha <- getLine
-     if read(escolha) == (resposta (lista!!i)) then do
+     if read(escolha) == (resposta (lista!i)) then do
         let scoreTotal = incrementaScore nivel score
         putStrLn "Parabens!"
      else do
         let vidaAtual = decrementaLife vida
-        putStrLn  ("Voce errou! A resposta correta eh a alternativa:" ++(alternativas (lista!!i)))
+        putStrLn  ("Voce errou! A resposta correta eh a alternativa:" ++(alternativas (lista!i)))
         putStrLn ("Quantidade de vidas: " ++show(vidaAtual))
 
 perguntasN1Animais :: Array Int Pergunta
@@ -86,7 +86,7 @@ perguntasN1Animais = array (1,25) [(1, Pergunta {texto = "Ratos sentem cocegas. 
     (23, Pergunta {texto = "Quanto tempo dura a gestacao de uma vaca?", alternativas = "1. 9 meses \n2. 10 meses \n3. 4 meses \n4. 12 meses", resposta = 1}),
     (24, Pergunta {texto = "Qual eh o animal terrestre mais alto do mundo?", alternativas = "1. Elefante \n2. Girafa \n3. Zebra \n4. Macaco", resposta = 2}),
     (25, Pergunta {texto = "Qual eh o animal mais pesado do mundo?", alternativas = "1. Baleia-Azul \n2. Elefante \n3. Rinoceronte \n4. Hipopotamo", resposta = 1})]
-
+    
 -- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
 -- utilizar isso pras demais funcoes
 showMenu = do
