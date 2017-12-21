@@ -1,12 +1,6 @@
 import Textos
 import Data.Array
 
-
--- Definindo tipos
---type Posicao = (Int, Int)
---type Pergunta = (String, String, Int)
---type Celula = (Int, Pergunta)
-
 type Tabuleiro = Array Posicao Celula
 
 data Pergunta = Pergunta { texto :: String,
@@ -51,6 +45,7 @@ exibirPergunta :: Int -> Int -> Int -> Int-> [Pergunta] -> IO()
 exibirPergunta i  nivel score vida lista = do
      putStrLn  (texto (lista!!i))
      putStrLn  (alternativas (lista!!i))
+     putStrLn "Escolha uma alternativa: "
      escolha <- getLine
      if read(escolha) == (resposta (lista!!i)) then do
         let scoreTotal = incrementaScore nivel score
