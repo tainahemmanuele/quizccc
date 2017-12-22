@@ -39,25 +39,6 @@ tabuleiro = [
 decrementaLife vida | vida == 0 = -1
      |otherwise  = vida - 1
 
---Falta terminar a funcao
-verificaSeEhPossivelCaminhar :: Posicao -> Bool
-verificaSeEhPossivelCaminhar pos |(posX pos < 0 ||  posX pos> 4) || (posY pos< 0 || posY pos> 4) = False
-     --tabuleiro[pos.posX][pos.posY].value == -1 = False
-     |otherwise = True
-
---exibirPergunta :: Int -> Int -> Int -> Int-> [Pergunta] -> IO()
---exibirPergunta i  nivel score vida lista = do
-     --putStrLn  (texto (lista!!i))
-     --putStrLn  (alternativas (lista!!i))
-     --putStrLn "Escolha uma alternativa: "
-     --escolha <- getLine
-     --if read(escolha) == (resposta (lista!!i)) then do
-        --let scoreTotal = incrementaScore nivel score
-        --putStrLn "Parabens!"
-     --else do
-        --let vidaAtual = decrementaLife vida
-        --putStrLn  ("Voce errou! A resposta correta eh a alternativa:" ++(alternativas (lista!!i)))
-        --putStrLn ("Quantidade de vidas: " ++show(vidaAtual))
 
 perguntasSelecionadas :: Int -> Int -> [(String, Integer)]
 perguntasSelecionadas nivel tema |nivel == 1 && tema  == 1 = Perguntas.perguntasNivelUm
@@ -67,16 +48,12 @@ perguntasSelecionadas nivel tema |nivel == 1 && tema  == 1 = Perguntas.perguntas
     |nivel == 2 && tema == 2 = Perguntas.preenchePerguntasNivelDois_APLP
     |otherwise = Perguntas.preenchePerguntasNivelTres_APLP
     
--- Inicialmente salvei tema e nivel dentro da funcao, precisamos ver como
--- utilizar isso pras demais funcoes
+
 showMenu = do
-    --let tabuleiro = array ((1,1)(5,5)) 
     putStrLn "\n"
     putStrLn "Indique o numero correspondente ao tema que voce deseja jogar:"
     putStrLn "\n"
     putStrLn "1 - Animais\n"
-    -- Lembrando que falta criar perguntas para os temas seguintes,
-    -- e analisar a sugestao da prof de adicionar temas de PLP
     putStrLn "2 - PLP\n"
 
     
@@ -85,7 +62,6 @@ showMenu = do
     putStrLn "\n"
     putStrLn "Indique o numero correspondente ao nivel desejado"
     putStrLn "\n"
-    -- Tambem precisamos analisar como separar as perguntas por niveis
     putStrLn "1 - Facil\n"
     putStrLn "2 - Medio\n"
     putStrLn "3 - Dificil\n"
