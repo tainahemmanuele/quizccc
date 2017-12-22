@@ -1,6 +1,7 @@
-import Textos
 import Data.Array
 import Data.Matrix
+import Textos
+import System.Random
 
 type Tabuleiro = Array Posicao Celula
 
