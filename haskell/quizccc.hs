@@ -15,11 +15,6 @@ main = do
     Textos.textoObjetivo
     Textos.textoFinal
     showMenu
-<<<<<<< HEAD
-    
-=======
-    jogar (criarMatriz) 1 1 0 3 0
->>>>>>> master
 
 qtdBuracos :: Int -> Int
 qtdBuracos nivel |nivel ==1 = 8
@@ -99,21 +94,21 @@ showMenu = do
     let perguntas = (perguntasSelecionadas (read(nivel)) (read( tema)))
     putStrLn "\n"
     putStrLn "Excelente, agora vamos iniciar o jogo\n"
-    jogar (criarMatriz) 1 1 0 3 perguntas
+    jogar (criarMatriz) 1 1 0 3 0 perguntas
     
 
-jogar :: Matrix [Char] -> Int -> Int -> Int -> Int -> Int -> IO()
-jogar matriz 5 y jogadas vidas score = putStrLn "Você venceu, parabéns!"
-jogar matriz x 5 jogadas vidas score = putStrLn "Você venceu, parabéns!"
-jogar matriz x y jogadas 0 score = putStrLn ("Poxa, você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 2 1 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 2 2 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 3 4 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 4 3 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 3 5 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 4 2 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz 4 5 jogadas vidas score = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
-jogar matriz posx posy jogada vidas score = do
+jogar :: Matrix [Char] -> Int -> Int -> Int -> Int -> Int ->  [(String, Integer)] -> IO()
+jogar matriz 5 y jogadas vidas score perguntas = putStrLn "Você venceu, parabéns!"
+jogar matriz x 5 jogadas vidas score perguntas = putStrLn "Você venceu, parabéns!"
+jogar matriz x y jogadas 0 score perguntas = putStrLn ("Poxa, você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 2 1 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 2 2 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 3 4 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 4 3 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 3 5 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 4 2 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz 4 5 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
+jogar matriz posx posy jogada vidas score perguntas = do
         print matriz
         putStrLn "Você quer ir para \n 1 - Esquerda \n 2 - Direita\n 3 - Baixo\n"
         putStrLn "Selecione a opção: "
@@ -123,25 +118,25 @@ jogar matriz posx posy jogada vidas score = do
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova posx (posy - 1) (jogada + 1) vidas $ incrementaScore 1 score
+                jogar matrizNova posx (posy - 1) (jogada + 1) vidas (incrementaScore 1 score) perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova posx (posy - 1) (jogada + 1) (decrementaLife vidas) score 
+                jogar matrizNova posx (posy - 1) (jogada + 1) (decrementaLife vidas) score perguntas
         else if opcao == "2" then do
             let matrizNova = setElem " " (posx, posy + 1) matriz
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova posx (posy + 1) (jogada + 1) vidas $ incrementaScore 1 score 
+                jogar matrizNova posx (posy + 1) (jogada + 1) vidas (incrementaScore 1 score ) perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova posx (posy + 1) (jogada + 1) (decrementaLife vidas) score
+                jogar matrizNova posx (posy + 1) (jogada + 1) (decrementaLife vidas) score perguntas
         else do
             let matrizNova = setElem " " (posx + 1, posy) matriz
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova (posx + 1) posy (jogada + 1) vidas $incrementaScore 1 score
+                jogar matrizNova (posx + 1) posy (jogada + 1) vidas (incrementaScore 1 score) perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova (posx + 1) posy (jogada + 1) (decrementaLife vidas) score
+                jogar matrizNova (posx + 1) posy (jogada + 1) (decrementaLife vidas) score perguntas
