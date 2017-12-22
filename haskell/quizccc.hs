@@ -40,7 +40,7 @@ tabuleiro = [
     ["X", "X", "X", "X", "X"]]
 
 decrementaLife vida | vida == 0 = -1
-     |otherwise  = vida -1
+     |otherwise  = vida - 1
 
 --Falta terminar a funcao
 verificaSeEhPossivelCaminhar :: Posicao -> Bool
@@ -90,10 +90,11 @@ showMenu = do
     putStrLn "3 - Dificil\n"
     
     nivel <- getLine
-    let perguntas = (perguntasSelecionadas ((read(nivel)) (read(tema))))
+    --let perguntas = (perguntasSelecionadas ((read(nivel)) (read(tema))))
+    --print perguntas
     putStrLn "\n"
     putStrLn "Excelente, agora vamos iniciar o jogo\n"
-    jogar (criarMatriz) 1 1 0 3 perguntas
+    jogar (criarMatriz) 1 1 0 3 preenchePerguntasNivelUm
     
 
 jogar :: Matrix [Char] -> Int -> Int -> Int -> Int -> [(String, Int)] -> IO ()
@@ -117,28 +118,28 @@ jogar matriz posx posy jogada vidas perguntas = do
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova posx (posy - 1) (jogada + 1) vidas
+                jogar matrizNova posx (posy - 1) (jogada + 1) vidas perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova posx (posy - 1) (jogada + 1) $ decrementaLife vidas
+                jogar matrizNova posx (posy - 1) (jogada + 1) (decrementaLife vidas) perguntas
         else if opcao == "2" then do
             let matrizNova = setElem " " (posx, posy + 1) matriz
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova posx (posy + 1) (jogada + 1) vidas
+                jogar matrizNova posx (posy + 1) (jogada + 1) vidas perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova posx (posy + 1) (jogada + 1) $ decrementaLife vidas
+                jogar matrizNova posx (posy + 1) (jogada + 1) (decrementaLife vidas) perguntas
         else do
             let matrizNova = setElem " " (posx + 1, posy) matriz
             putStrLn $ fst (perguntas!!jogada)
             resposta <- getLine
             if (read resposta) == snd (perguntas!!jogada) then do
-                jogar matrizNova (posx + 1) posy (jogada + 1) vidas
+                jogar matrizNova (posx + 1) posy (jogada + 1) vidas perguntas
             else do
                 putStrLn "Você errou!!!"
-                jogar matrizNova (posx + 1) posy (jogada + 1) $ decrementaLife vidas
+                jogar matrizNova (posx + 1) posy (jogada + 1) (decrementaLife vidas) perguntas
 
 preenchePerguntasNivelUm :: [(String, Int)]
 preenchePerguntasNivelUm =
