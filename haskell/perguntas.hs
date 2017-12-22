@@ -168,3 +168,4 @@ preenchePerguntasNivelTres_APLP = [
     ("Sobre Atores, é incorreto afirmar:\n1 - Um ator só pode se comunicar com outros atores para os quais possui o endereço \n2 - É possível obter o endereço de um ator que lhe enviou uma mensagem, ou de atores criados por ele próprio. \n3 - Comunicação via passagem de mensagens \n4 - A comunicação é obrigatoriamente síncrona", 4),
     ("São características de Erlang: A comunicação entre processos é feita através da passagem de mensagens, Dinamicamente tipada, Programação funcional, Programa dividido em processos e funções.\n1 - Verdadeiro \n2 - Falso", 1),
     ("Julgue a seguinte sentença: Se A é um subtipo de B, então o conjunto de valores de A está contido no conjunto de valores de B.\n1 - Verdadeiro \n2 - Falso", 1)]
+
