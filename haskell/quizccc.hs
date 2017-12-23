@@ -74,8 +74,8 @@ showMenu = do
     
 
 jogar :: Matrix [Char] -> Int -> Int -> Int -> Int -> Int ->  [(String, Integer)] -> IO()
-jogar matriz 5 y jogadas vidas score perguntas = putStrLn "Você venceu, parabéns!"
-jogar matriz x 5 jogadas vidas score perguntas = putStrLn "Você venceu, parabéns!"
+jogar matriz 5 y jogadas vidas score perguntas = putStrLn ("Você venceu, parabéns! Sua pontuacao foi:" ++ (show score))
+jogar matriz x 5 jogadas vidas score perguntas = putStrLn ("Você venceu, parabéns! Sua pontuacao foi:" ++ (show score))
 jogar matriz x y jogadas 0 score perguntas = putStrLn ("Poxa, você perdeu! Sua pontuacao foi: " ++ (show score))
 jogar matriz 2 1 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
 jogar matriz 2 2 jogadas vidas score perguntas = putStrLn ("Buraco! Você perdeu! Sua pontuacao foi: " ++ (show score))
