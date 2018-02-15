@@ -28,17 +28,44 @@ textoFinal(
 PRODUZIDO POR:
 ANA BARROS | ANTUNES DANTAS | DAVID SOUZA | TAINAH EMMANUELE | THALYTA FABRINE
 ------------------------------------------------------------------------------').
- 
+
+textoTema('\nIndique o numero correspondente ao tema que voce deseja jogar:  \n1 - Animais \n2 - PLP\n').
+
+textoNivel('\nIndique o numero correspondente ao nivel desejado: \n1 - Facil \n2 - Medio \n3 - Dificil\n').
+
+qtdBuracos(1, 8).
+qtdBuracos(2, 10).
+qtdBuracos(3, 12).
+
 :- initialization (main).
 
 main :-
     textoInicial(QUIZZCCC),
     write(QUIZZCCC),
     nl,
+
     textoObjetivo(O),
     write(O),
     nl,
-    textoFinal(EQUIPE),
-    write(EQUIPE),
+
+    textoFinal(Equipe),
+    write(Equipe),
     nl,
+
+    textoTema(TextoTema),
+    write(TextoTema),
+    nl,
+
+    read_line_to_codes(user_input, NumeroTemaSystem),
+    string_to_atom(NumeroTemaSystem, NumeroTemaString),
+    atom_number(NumeroTemaString, NumeroTema),
+
+    textoNivel(TextoNivel),
+    write(TextoNivel),
+    nl,
+
+    read_line_to_codes(user_input, NumeroNivelSystem),
+    string_to_atom(NumeroNivelSystem, NumeroNivelString),
+    atom_number(NumeroNivelString, NumeroNivel),
+
     halt(0).
