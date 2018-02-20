@@ -48,7 +48,7 @@ incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 2, NOVOSCORE is (SCORE + 1
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 3, NOVOSCORE is (SCORE + 150).
 
 decrementaLife(VIDA, NOVAVIDA) :-VIDA =\= 0, NOVAVIDA is (VIDA-1).
-decrementaLife(VIDA, NOVAVIDA) :- NOVAVIDA is -1.
+decrementaLife(VIDA, NOVAVIDA) :- NOVAVIDA ='Poxa, você perdeu! Sua pontuacao foi:'.
 
 :- initialization (main).
 
