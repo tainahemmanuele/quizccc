@@ -1,28 +1,28 @@
-textoInicial( 
+textoInicial(
 '----------------------------------------------------------------------------
-  ########  ####   ###  #### ##########      ########   ########   ########   
- #### ##### ####   ###  ####  ## #####      ##### #### ##### #### ##### ####  
-####    ### ####   ###  ####    ####        ###        ###        ###         
-####    ### ####   ###  ####  ####          ###        ###        ###         
- #########   #########  #### ##### ###       #########  #########  #########  
-  #########   #######   #### ##########       #######    #######    #######  
-         ##                                                                   
+  ########  ####   ###  #### ##########      ########   ########   ########
+ #### ##### ####   ###  ####  ## #####      ##### #### ##### #### ##### ####
+####    ### ####   ###  ####    ####        ###        ###        ###
+####    ### ####   ###  ####  ####          ###        ###        ###
+ #########   #########  #### ##### ###       #########  #########  #########
+  #########   #######   #### ##########       #######    #######    #######
+         ##
 -----------------------------------------------------------------------------').
 
 textoObjetivo(
 '----------------------------  OBJETIVO DO JOGO ------------------------------
->> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior 
+>> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior
    pontuacao possivel.
 >> O jogador deve indicar o numero correspondente ao tema de interesse.
->> Em seguida, ele deve informar o numero correspondente a dificuldade do jogo, 
+>> Em seguida, ele deve informar o numero correspondente a dificuldade do jogo,
    classificada em: Facil, Medio e Dificil.
 >> Apos selecionado o tema e o nivel, o jogo eh iniciado e o jogador escolhe a
    posicao que deseja avancar no tabuleiro
->> A rodada|jogo acaba quando o jogador "cair" em um buraco ou quando a 
+>> A rodada|jogo acaba quando o jogador "cair" em um buraco ou quando a
    quantidade de vidas estiver zerada.
->> O jogador vence quando chegar a ultima celula posicionada no canto inferior 
+>> O jogador vence quando chegar a ultima celula posicionada no canto inferior
    a direita do tabuleiro.
->> Ao final da rodada, ganhando ou nao, o jogador sera informado que a mesma 
+>> Ao final da rodada, ganhando ou nao, o jogador sera informado que a mesma
    acabou e a sua pontuacao sera exibida.
 ------------------------------------------------------------------------------
 -----------------------  SIGINIFICADO DOS SIMBOLOS  --------------------------
@@ -46,6 +46,9 @@ qtdBuracos(3, 12).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 1, NOVOSCORE is (SCORE + 50).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 2, NOVOSCORE is (SCORE + 100).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 3, NOVOSCORE is (SCORE + 150).
+
+decrementaLife(VIDA, NOVAVIDA) :-VIDA =\= 0, NOVAVIDA is (VIDA-1).
+decrementaLife(VIDA, NOVAVIDA) :- NOVAVIDA is -1.
 
 :- initialization (main).
 
