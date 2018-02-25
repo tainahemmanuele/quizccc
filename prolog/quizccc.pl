@@ -201,10 +201,49 @@ qtdBuracos(1, 8).
 qtdBuracos(2, 10).
 qtdBuracos(3, 12).
 
+/*Funcao para numeros aleatorios entre 1 e 5.*/
+numeroAleatorio(X):- random(1, 5, X).
+	
+/*Gera coordenada aleatória da matriz*/
+gerarCoordAleatoria(Coord):- numeroAleatorio(X), numeroAleatorio(Y), Coord = (X,Y).
+
+/*Predicado que gera os buracos na matriz*/
+geraBuracos(QtdBuracos, ListBuracos):- length(TempList, QtdBuracos),
+	maplist( gerarCoordAleatoria, TempList), sort(TempList, ListBombas).
+	
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 1, NOVOSCORE is (SCORE + 50).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 2, NOVOSCORE is (SCORE + 100).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 3, NOVOSCORE is (SCORE + 150).
 
+/*Edita a lista pegando as posições X e Y*/
+editaLista(CoordX, CoordY, Elem, [(CoordX, CoordY, _)|T], [(CoordX, CoordY, Elem)|T]).	
+editaLista(CoordX, CoordY, Elem, [H|T], NovaLista):- NovaLista = [H|Ts],
+	editaLista(CoordX, CoordY, Elem, T, Ts).
+
+criaMatriz(X, Matriz):- Matriz = 
+[(1, 1, X), (1, 2, X), (1, 3, X), (1, 4, X), (1, 5, X), 
+ (2, 1, X), (2, 2, X), (2, 3, X), (2, 4, X), (2, 5, X), 
+ (3, 1, X), (3, 2, X), (3, 3, X), (3, 4, X), (3, 5, X), 
+ (4, 1, X), (4, 2, X), (4, 3, X), (4, 4, X), (4, 5, X), 
+ (5, 1, X), (5, 2, X), (5, 3, X), (5, 4, X), (5, 5, X)]. 
+ 
+/*Funcao que insere as bombas na matriz.*/
+insereBuracos([], Matriz, Matriz).
+insereBuracos([(X,Y)|TBuracos], Matriz, NovaMatriz):- editaLista(X, Y, -1, Matriz, MatrizTemp),
+	insereBuracos(TBuracos, MatrizTemp, NovaMatriz).
+
+imprimeMatriz([]):-
+	write("       ---------------------"),nl. 
+imprimeMatriz([(_,_,X1),(_,_,X2), (_,_,X3), (_,_,X4), (_,_,X5)|Corpo]):- 
+	write("       ---------------------"),nl, 
+	write("       | "), write(X1), 
+	write(" | "), write(X2), 
+	write(" | "), write(X3), 
+	write(" | "), write(X4), 
+	write(" | "), write(X5), 
+	write(" |"), nl,imprimeMatriz(Corpo).
+	
+	
 :- initialization (main).
 
 main :-
@@ -230,5 +269,13 @@ main :-
     read_line_to_codes(user_input, NumeroNivelSystem),
     string_to_atom(NumeroNivelSystem, NumeroNivelString),
     atom_number(NumeroNivelString, NumeroNivel),
+    
+    qtdBuracos(NumeroNivel, QtdBuracos),
+    
+    criaMatriz(0, Matriz),
+    criaMatriz(" ", MatrizExibicao),
+    geraBuracos(QtdBuracos, Buracos),
+    insereBuracos(Buracos, Matriz, MatrizComBuracos),
+    imprimeMatriz(MatrizExibicao), nl,
 
     halt(0).
