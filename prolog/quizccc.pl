@@ -1,28 +1,28 @@
-textoInicial( 
+textoInicial(
 '----------------------------------------------------------------------------
-  ########  ####   ###  #### ##########      ########   ########   ########   
- #### ##### ####   ###  ####  ## #####      ##### #### ##### #### ##### ####  
-####    ### ####   ###  ####    ####        ###        ###        ###         
-####    ### ####   ###  ####  ####          ###        ###        ###         
- #########   #########  #### ##### ###       #########  #########  #########  
-  #########   #######   #### ##########       #######    #######    #######  
-         ##                                                                   
+  ########  ####   ###  #### ##########      ########   ########   ########
+ #### ##### ####   ###  ####  ## #####      ##### #### ##### #### ##### ####
+####    ### ####   ###  ####    ####        ###        ###        ###
+####    ### ####   ###  ####  ####          ###        ###        ###
+ #########   #########  #### ##### ###       #########  #########  #########
+  #########   #######   #### ##########       #######    #######    #######
+         ##
 -----------------------------------------------------------------------------').
 
 textoObjetivo(
 '----------------------------  OBJETIVO DO JOGO ------------------------------
->> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior 
+>> O jogador tem como objetivo chegar ao outro lado do tabuleiro com a maior
    pontuacao possivel.
 >> O jogador deve indicar o numero correspondente ao tema de interesse.
->> Em seguida, ele deve informar o numero correspondente a dificuldade do jogo, 
+>> Em seguida, ele deve informar o numero correspondente a dificuldade do jogo,
    classificada em: Facil, Medio e Dificil.
 >> Apos selecionado o tema e o nivel, o jogo eh iniciado e o jogador escolhe a
    posicao que deseja avancar no tabuleiro
->> A rodada|jogo acaba quando o jogador "cair" em um buraco ou quando a 
+>> A rodada|jogo acaba quando o jogador "cair" em um buraco ou quando a
    quantidade de vidas estiver zerada.
->> O jogador vence quando chegar a ultima celula posicionada no canto inferior 
+>> O jogador vence quando chegar a ultima celula posicionada no canto inferior
    a direita do tabuleiro.
->> Ao final da rodada, ganhando ou nao, o jogador sera informado que a mesma 
+>> Ao final da rodada, ganhando ou nao, o jogador sera informado que a mesma
    acabou e a sua pontuacao sera exibida.
 ------------------------------------------------------------------------------
 -----------------------  SIGINIFICADO DOS SIMBOLOS  --------------------------
@@ -117,7 +117,7 @@ pergunta(1, 3, 22, "O narval eh um tipo de:\n1. Peixe \n2. Cobra \n3. Aracnideo 
 pergunta(1, 3, 23, "Qual eh a alternativa correta?\n1. O maior animal do mundo eh a formiga. \n2. Os peixes sao animais invertebrados e de sangue frio. \n3. Existem cerca de 5 mil especies diferentes de mamiferos. \n4. O tamandua tem uma lingua pequena.", 3).
 pergunta(1, 3, 24, "A pele dos repteis sao:\n1. Seca, grossa e impermeavel. \n2. Fofa, rosa e macia. \n3. Peluda, verde e brilhante. \n4. Lisa, colorida e feia.", 1).
 pergunta(1, 3, 25, "Qual eh o unico animal que pode se queimar se for exposto ao sol?\n1. Elefante \n2. Porco \n3. Rato \n4. Rinoceronte", 2).
- 
+
 
 pergunta(2, 1, 1, "Julgue a seguinte sentença: Sintaxe está relacionado ao significado do programa. Como eles se comportam quando executados em um computador.\n1 - Verdadeiro \n2 - Falso", 2).
 pergunta(2, 1, 2, "Julgue a seguinte sentença: Semântica Dinâmica define como e quando as construções de uma linguagem devem produzir um comportamento.\n1 - Verdadeiro \n2 - Falso", 1).
@@ -203,47 +203,51 @@ qtdBuracos(3, 12).
 
 /*Funcao para numeros aleatorios entre 1 e 5.*/
 numeroAleatorio(X):- random(1, 5, X).
-	
+
 /*Gera coordenada aleatória da matriz*/
 gerarCoordAleatoria(Coord):- numeroAleatorio(X), numeroAleatorio(Y), Coord = (X,Y).
 
 /*Predicado que gera os buracos na matriz*/
 geraBuracos(QtdBuracos, ListBuracos):- length(TempList, QtdBuracos),
 	maplist( gerarCoordAleatoria, TempList), sort(TempList, ListBombas).
-	
+
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 1, NOVOSCORE is (SCORE + 50).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 2, NOVOSCORE is (SCORE + 100).
 incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 3, NOVOSCORE is (SCORE + 150).
 
-/*Edita a lista pegando as posições X e Y*/
-editaLista(CoordX, CoordY, Elem, [(CoordX, CoordY, _)|T], [(CoordX, CoordY, Elem)|T]).	
-editaLista(CoordX, CoordY, Elem, [H|T], NovaLista):- NovaLista = [H|Ts],
-	editaLista(CoordX, CoordY, Elem, T, Ts).
+decrementaLife(VIDA, NOVAVIDA, SCORE) :- VIDA =\= 0, NOVAVIDA is (VIDA-1).
+decrementaLife(VIDA, NOVAVIDA, SCORE) :-  write('Poxa, você perdeu! Sua pontuacao foi:' ), write(SCORE).
 
-criaMatriz(X, Matriz):- Matriz = 
-[(1, 1, X), (1, 2, X), (1, 3, X), (1, 4, X), (1, 5, X), 
- (2, 1, X), (2, 2, X), (2, 3, X), (2, 4, X), (2, 5, X), 
- (3, 1, X), (3, 2, X), (3, 3, X), (3, 4, X), (3, 5, X), 
- (4, 1, X), (4, 2, X), (4, 3, X), (4, 4, X), (4, 5, X), 
- (5, 1, X), (5, 2, X), (5, 3, X), (5, 4, X), (5, 5, X)]. 
- 
+
+/*Edita a lista pegando as posições X e Y*/
+editaLista(CoordX, CoordY, Elem, [(CoordX, CoordY, _)|T], [(CoordX, CoordY, Elem)|T]).
+editaLista(CoordX, CoordY, Elem, [H|T], NovaLista):- NovaLista = [H|Ts],
+editaLista(CoordX, CoordY, Elem, T, Ts).
+
+criaMatriz(X, Matriz):- Matriz =
+[(1, 1, X), (1, 2, X), (1, 3, X), (1, 4, X), (1, 5, X),
+ (2, 1, X), (2, 2, X), (2, 3, X), (2, 4, X), (2, 5, X),
+ (3, 1, X), (3, 2, X), (3, 3, X), (3, 4, X), (3, 5, X),
+ (4, 1, X), (4, 2, X), (4, 3, X), (4, 4, X), (4, 5, X),
+ (5, 1, X), (5, 2, X), (5, 3, X), (5, 4, X), (5, 5, X)].
+
 /*Funcao que insere as bombas na matriz.*/
 insereBuracos([], Matriz, Matriz).
 insereBuracos([(X,Y)|TBuracos], Matriz, NovaMatriz):- editaLista(X, Y, -1, Matriz, MatrizTemp),
-	insereBuracos(TBuracos, MatrizTemp, NovaMatriz).
+insereBuracos(TBuracos, MatrizTemp, NovaMatriz).
 
 imprimeMatriz([]):-
-	write("       ---------------------"),nl. 
-imprimeMatriz([(_,_,X1),(_,_,X2), (_,_,X3), (_,_,X4), (_,_,X5)|Corpo]):- 
-	write("       ---------------------"),nl, 
-	write("       | "), write(X1), 
-	write(" | "), write(X2), 
-	write(" | "), write(X3), 
-	write(" | "), write(X4), 
-	write(" | "), write(X5), 
+	write("       ---------------------"),nl.
+imprimeMatriz([(_,_,X1),(_,_,X2), (_,_,X3), (_,_,X4), (_,_,X5)|Corpo]):-
+	write("       ---------------------"),nl,
+	write("       | "), write(X1),
+	write(" | "), write(X2),
+	write(" | "), write(X3),
+	write(" | "), write(X4),
+	write(" | "), write(X5),
 	write(" |"), nl,imprimeMatriz(Corpo).
-	
-	
+
+
 :- initialization (main).
 
 main :-
@@ -269,9 +273,9 @@ main :-
     read_line_to_codes(user_input, NumeroNivelSystem),
     string_to_atom(NumeroNivelSystem, NumeroNivelString),
     atom_number(NumeroNivelString, NumeroNivel),
-    
+
     qtdBuracos(NumeroNivel, QtdBuracos),
-    
+
     criaMatriz(0, Matriz),
     criaMatriz(" ", MatrizExibicao),
     geraBuracos(QtdBuracos, Buracos),
