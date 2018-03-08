@@ -211,18 +211,89 @@ gerarCoordAleatoria(Coord):- numeroAleatorio(X), numeroAleatorio(Y), Coord = (X,
 geraBuracos(QtdBuracos, ListBuracos):- length(TempList, QtdBuracos),
 	maplist( gerarCoordAleatoria, TempList), sort(TempList, ListBombas).
 
-incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 1, NOVOSCORE is (SCORE + 50).
-incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 2, NOVOSCORE is (SCORE + 100).
-incrementaScore(NIVEL, SCORE, NOVOSCORE) :- NIVEL =;= 3, NOVOSCORE is (SCORE + 150).
+incrementaScore(1, Score, NovoScore) :- NovoScore is (SCORE + 50).
+incrementaScore(2, Score, NovoScore) :- NovoScore is (SCORE + 100).
+incrementaScore(3, Score, NovoScore) :- NovoScore is (SCORE + 150).
 
 decrementaLife(VIDA, NOVAVIDA, SCORE) :- VIDA =\= 0, NOVAVIDA is (VIDA-1).
 decrementaLife(VIDA, NOVAVIDA, SCORE) :-  write('Poxa, você perdeu! Sua pontuacao foi:' ), write(SCORE).
 
+andar(AtualX, AtualY, 1, NovaX, NovaY) :- NovaX is AtualX, NovaY is (AtualY - 1).
+andar(AtualX, AtualY, 2, NovaX, NovaY) :- NovaX is AtualX, NovaY is (AtualY + 1).
+andar(AtualX, AtualY, 3, NovaX, NovaY) :- NovaX is (AtualX + 1), NovaY is AtualY.
+andar(AtualX, AtualY, _, NovaX, NovaY) :- NovaX is AtualX, NovaY is AtualY.
+
+getAndar(ValorAndar) :- write("Você quer ir para \n 1 - Esquerda \n 2 - Direita\n 3 - Baixo\n"),
+    write("Selecione a opção: "),
+    read_line_to_codes(user_input, NumeroAndarSystem),
+    string_to_atom(NumeroAndarSystem, NumeroAndarString),
+    atom_number(NumeroAndarString, NumeroAndar),
+    ValorAndar is NumeroAndar.
+
+getResposta(Resposta) :-
+    read_line_to_codes(user_input, NumeroRespostaSystem),
+    string_to_atom(NumeroRespostaSystem, NumeroRespostaString),
+    atom_number(NumeroRespostaString, NumeroResposta),
+    Resposta is NumeroResposta.
+
+jogar(_,2,1,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score). 
+jogar(_,2,2,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score). 
+jogar(_,3,4,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score). 
+jogar(_,4,3,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score).
+jogar(_,3,5,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score).
+jogar(_,4,2,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score).
+jogar(_,4,5,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score).
+jogar(_,5,_,_,_,Score,_,_) :- write('Parabéns! Você venceu! Sua pontuação foi: '), write(Score).
+jogar(_,_,5,_,_,Score,_,_) :- write('Parabéns! Você venceu! Sua pontuação foi: '), write(Score).
+jogar(MatrizJogo, Posx, Posy, Vidas, Rodada, Score, A, B) :-
+    NovaRodada is (Rodada + 1),
+    posicaoNoTabuleiro(Posx, Posy, Indice),
+    replace(MatrizJogo, Indice, (_,_,'@'), NovaMatrizJogo),
+    imprimeMatriz(NovaMatrizJogo),
+    getAndar(AndarJogada),
+    andar(Posx, Posy, AndarJogada, NovaPosx, NovaPosy),
+    pergunta(B, A, Rodada, TextoPergunta, ValorResposta),
+    write(TextoPergunta),nl,
+    getResposta(ValorRespostaUsuario),
+    (ValorRespostaUsuario =\= ValorResposta -> VidaPerdida is Vidas - 1, 
+    jogar(NovaMatrizJogo, Posx, Posy, VidaPerdida, NovaRodada, Score, A, B);
+    ScoreAtualizado is Score + 50,
+    jogar(NovaMatrizJogo, NovaPosx, NovaPosy, Vidas, NovaRodada, ScoreAtualizado, A, B)).
 
 /*Edita a lista pegando as posições X e Y*/
 editaLista(CoordX, CoordY, Elem, [(CoordX, CoordY, _)|T], [(CoordX, CoordY, Elem)|T]).
 editaLista(CoordX, CoordY, Elem, [H|T], NovaLista):- NovaLista = [H|Ts],
 editaLista(CoordX, CoordY, Elem, T, Ts).
+
+replace([_|T], 0, X, [X|T]).
+replace([H|T], I, X, [H|R]):- I > -1, NI is I-1, replace(T, NI, X, R), !.
+replace(L, _, _, L).
+
+posicaoNoTabuleiro(1, 1, 0).
+posicaoNoTabuleiro(1, 2, 1).
+posicaoNoTabuleiro(1, 3, 2).
+posicaoNoTabuleiro(1, 4, 3).
+posicaoNoTabuleiro(1, 5, 4).
+posicaoNoTabuleiro(2, 1, 5).
+posicaoNoTabuleiro(2, 2, 6).
+posicaoNoTabuleiro(2, 3, 7).
+posicaoNoTabuleiro(2, 4, 8).
+posicaoNoTabuleiro(2, 5, 9).
+posicaoNoTabuleiro(3, 1, 10).
+posicaoNoTabuleiro(3, 2, 11).
+posicaoNoTabuleiro(3, 3, 12).
+posicaoNoTabuleiro(3, 4, 13).
+posicaoNoTabuleiro(3, 5, 14).
+posicaoNoTabuleiro(4, 1, 15).
+posicaoNoTabuleiro(4, 2, 16).
+posicaoNoTabuleiro(4, 3, 17).
+posicaoNoTabuleiro(4, 4, 18).
+posicaoNoTabuleiro(4, 5, 19).
+posicaoNoTabuleiro(5, 1, 20).
+posicaoNoTabuleiro(5, 2, 21).
+posicaoNoTabuleiro(5, 3, 22).
+posicaoNoTabuleiro(5, 4, 23).
+posicaoNoTabuleiro(5, 5, 24).
 
 criaMatriz(X, Matriz):- Matriz =
 [(1, 1, X), (1, 2, X), (1, 3, X), (1, 4, X), (1, 5, X),
@@ -280,6 +351,6 @@ main :-
     criaMatriz(" ", MatrizExibicao),
     geraBuracos(QtdBuracos, Buracos),
     insereBuracos(Buracos, Matriz, MatrizComBuracos),
-    imprimeMatriz(MatrizExibicao), nl,
+    jogar(MatrizExibicao, 1, 1, 3, 1, 0, NumeroNivel, NumeroTema),
 
     halt(0).
