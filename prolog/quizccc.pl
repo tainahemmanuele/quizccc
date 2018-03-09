@@ -229,9 +229,10 @@ getResposta(Resposta) :-
     atom_number(NumeroRespostaString, NumeroResposta),
     Resposta is NumeroResposta.
 
-jogar(_,2,1,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl. 
-jogar(_,2,2,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl. 
-jogar(_,3,4,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl. 
+jogar(_,_,_,0,_,Score,_,_) :- write('Você perdeu! Sua pontuação foi: '), write(Score), nl.
+jogar(_,2,1,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
+jogar(_,2,2,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
+jogar(_,3,4,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
 jogar(_,4,3,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
 jogar(_,3,5,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
 jogar(_,4,2,_,_,Score,_,_) :- write('Você caiu num buraco! Sua pontuação foi: '), write(Score), nl.
@@ -248,7 +249,7 @@ jogar(MatrizJogo, Posx, Posy, Vidas, Rodada, Score, A, B) :-
     pergunta(B, A, Rodada, TextoPergunta, ValorResposta),
     write(TextoPergunta),nl,
     getResposta(ValorRespostaUsuario),
-    (ValorRespostaUsuario =\= ValorResposta -> VidaPerdida is Vidas - 1, 
+    (ValorRespostaUsuario =\= ValorResposta -> VidaPerdida is Vidas - 1,write("Você errou!"),nl,
     jogar(NovaMatrizJogo, Posx, Posy, VidaPerdida, NovaRodada, Score, A, B);
     ScoreAtualizado is Score + 50,
     jogar(NovaMatrizJogo, NovaPosx, NovaPosy, Vidas, NovaRodada, ScoreAtualizado, A, B)).
